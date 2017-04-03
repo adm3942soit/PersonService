@@ -25,7 +25,7 @@ public class PersonUI extends UI {
     private PersonService service;
 
     private Person customer;
-    com.adonis.ui.PersonView editor = new PersonView(this::savePerson, this::deletePerson);
+    com.adonis.ui.PersonView editor = new PersonView(this::savePerson, this::deletePerson, this::addPerson, true);
     HorizontalSplitPanel splitter = new HorizontalSplitPanel();
     private Grid<Person> grid = new Grid();
 
@@ -36,7 +36,7 @@ public class PersonUI extends UI {
         grid.addColumn(Person::getLastName).setCaption("Last name");
         grid.addColumn(Person::getEmail).setCaption("Email");
         grid.addColumn(Person::getLocalDateBirthDay).setCaption("BirthDay");
-
+        grid.addColumn(Person::getPicture).setCaption("Picture");
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         grid.addSelectionListener(e -> updateForm());
         grid.getEditor().addSaveListener(new EditorSaveListener() {
@@ -77,5 +77,8 @@ public class PersonUI extends UI {
         service.delete(person);
         updateGrid();
     }
-
+    private void addPerson(Person person){
+        service.insert(person);
+        updateGrid();
+    }
 }

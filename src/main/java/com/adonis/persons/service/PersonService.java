@@ -1,7 +1,6 @@
 package com.adonis.persons.service;
 
 import com.adonis.persons.Person;
-import com.adonis.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,15 +17,19 @@ public class PersonService {
     private JdbcTemplate jdbcTemplate;
 
     public List<Person> findAll() {
-        return jdbcTemplate.query(
-                "SELECT FIRST_NAME, LAST_NAME, EMAIL, PICTURE, DATE_OF_BIRTH FROM persons",
-                (rs, rowNum) -> new Person(
-                        rs.getString("FIRST_NAME"),
-                        rs.getString("LAST_NAME"),
-                        rs.getString("EMAIL"),
-                        rs.getString("PICTURE"),
-                        rs.getDate("DATE_OF_BIRTH")
-                ));
+        String sql = "SELECT * FROM persons";
+//        return jdbcTemplate.query(
+//                "SELECT FIRST_NAME, LAST_NAME, EMAIL, PICTURE, DATE_OF_BIRTH FROM persons",
+//                (rs, rowNum) -> new Person(
+//                        rs.getString("FIRST_NAME"),
+//                        rs.getString("LAST_NAME"),
+//                        rs.getString("EMAIL"),
+//                        rs.getString("PICTURE"),
+//                        rs.getDate("DATE_OF_BIRTH")
+//                ));
+        List<Person> customers  = jdbcTemplate.query(sql,
+                new BeanPropertyRowMapper(Person.class));
+        return customers;
     }
 
     public Person findByCustomerId(Long custId) {
@@ -46,6 +49,14 @@ public class PersonService {
         );
         return person;
     }
+    public int findTotalCustomer(){
+
+        String sql = "SELECT COUNT(*) FROM persons";
+
+        int total = jdbcTemplate.queryForObject(sql,Integer.class);
+
+        return total;
+    }
 
     public void updateFull(Person customer) {
         jdbcTemplate.update(
@@ -57,7 +68,6 @@ public class PersonService {
     }
 
     public void update(Person customer) {
-        if (customer.getId() != null) {
             jdbcTemplate.update(
                     "UPDATE persons SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? , LOGIN=?, PASSWORD=?, DATE_OF_BIRTH=?, PICTURE=?, NOTES=? " +
                             "WHERE ID=?",
@@ -65,26 +75,33 @@ public class PersonService {
                     customer.getLogin(), customer.getPassword(), customer.getDateOfBirth(),
                     customer.getPicture(), customer.getNotes(),
                     customer.getId());
-        } else {
-            jdbcTemplate.execute(
+    }
+    public void insert(Person customer) {
+            jdbcTemplate.update(
                     "INSERT INTO persons (FIRST_NAME, LAST_NAME, EMAIL, LOGIN, PASSWORD," +
-                            "PICTURE, NOTES, DATE_OF_BIRTH) VALUES " +
-                            "("
-                            + customer.getFirstName() + ", "
-                            + customer.getLastName() + ", "
-                            + customer.getEmail() + ", "
-                            + customer.getLogin() + ", "
-                            + customer.getPassword() + ", "
-                            + customer.getPicture() + ", "
-                            + customer.getNotes() + ", "
-                            + "'" + DateUtils.convertToString(customer.getDateOfBirth()) + "'" +
-                            ")"
-            );
-        }
+                            " PICTURE, NOTES, DATE_OF_BIRTH) VALUES " +
+                            "(?,?,?,?,?,?,?,?)",
+                    new Object[]{
+                            customer.getFirstName(),
+                            customer.getLastName(),
+                            customer.getEmail(),
+                            customer.getLogin(),
+                            customer.getPassword(),
+                            customer.getPicture(),
+                            customer.getNotes(),
+                            customer.getDateOfBirth()
+
+                    } );
     }
 
     public void save(Person customer) {
-//        jdbcTemplate.query(
+        jdbcTemplate.update(
+                "UPDATE persons SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? , LOGIN=?, PASSWORD=?, DATE_OF_BIRTH=?, PICTURE=?, NOTES=? " +
+                        "WHERE ID=?",
+                customer.getFirstName(), customer.getLastName(), customer.getEmail(),
+                customer.getLogin(), customer.getPassword(), customer.getDateOfBirth(),
+                customer.getPicture(), customer.getNotes(),
+                customer.getId());
     }
 
     public void delete(Person customer) {

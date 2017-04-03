@@ -26,10 +26,11 @@ import static java.lang.System.currentTimeMillis;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Person implements Serializable, Cloneable {
+public class Person implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
 	private Long id;
 
 
@@ -77,6 +78,7 @@ public class Person implements Serializable, Cloneable {
 	@PrePersist
 	protected void setCreatedDate() {
 		created = new Date(currentTimeMillis());
+		updated = new Date(currentTimeMillis());
 	}
 
 	@PreUpdate

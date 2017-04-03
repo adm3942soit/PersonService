@@ -2,10 +2,13 @@ package com.adonis.ui;
 
 import com.adonis.persons.Person;
 import com.adonis.ui.converters.DateConverter;
+import com.google.common.base.Strings;
 import com.vaadin.data.Binder;
 import com.vaadin.server.ExternalResource;
 
 public class PersonView extends PersonDesign {
+
+	Boolean view = true;
 
 	public interface PersonSaveListener {
 		void savePerson(Person person);
@@ -14,24 +17,47 @@ public class PersonView extends PersonDesign {
 	public interface PersonDeleteListener {
 		void deletePerson(Person person);
 	}
+	public interface PersonAddListener {
+		void addPerson(Person person);
+	}
 
 	Binder<Person> binder = new Binder<>(Person.class);
 
-	public PersonView(PersonSaveListener saveEvt, PersonDeleteListener delEvt) {
-
-		binder.forField(dateOfBirth).withConverter(new DateConverter()).bind("dateOfBirth");
-
+	public PersonView(PersonSaveListener saveEvt, PersonDeleteListener delEvt, PersonAddListener addListener, Boolean view) {
+        this.view = view;
+		binder.forField(picture).bind("picture");
+		binder.forField(dayOfBirth).withConverter(new DateConverter()).bind("dateOfBirth");
 		binder.bindInstanceFields(this );
+
+		if(view){
+			picture.setVisible(false);
+		}else
+			picture.setVisible(true);
 
 		save.addClickListener(evt -> {
 			try {
+				Person person = binder.getBean();
+				if(person.getId()!=null) {
+					saveEvt.savePerson(person);
+				}else{
+					addListener.addPerson(binder.getBean());
+					pictureImage.setSource(new ExternalResource(picture.getValue()));
+				}
 				binder.writeBean(binder.getBean());
-				saveEvt.savePerson(binder.getBean());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
+        add.addClickListener(evt->{
+			try {
+				this.view = false;
+				picture.setVisible(true);
+				this.setPerson(new Person());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
+		});
 		cancel.addClickListener(evt -> {
 
 		});
@@ -43,7 +69,16 @@ public class PersonView extends PersonDesign {
 
 	public void setPerson(Person selectedRow) {
 		binder.setBean(selectedRow);
-		picture.setSource(new ExternalResource(selectedRow.getPicture()));
+		if(!Strings.isNullOrEmpty(selectedRow.getPicture())) {
+			pictureImage.setSource(new ExternalResource(selectedRow.getPicture()));
+			picture.setValue(selectedRow.getPicture());
+		}
+		else {
+			pictureImage.setSource(new ExternalResource(""));
+			picture.setValue("");
+		}
+		picture.setVisible(!view);
+
 	}
 
 }
