@@ -15,20 +15,20 @@ import java.util.Date;
  * Created by oksdud on 31.03.2017.
  */
 @Slf4j
-public class DateConverter implements Converter<Date, LocalDate> {
+public class DateConverter implements Converter<LocalDate, Date> {
     @Override
-    public Result<LocalDate> convertToModel(Date value, ValueContext context) {
+    public Result<Date> convertToModel(LocalDate value, ValueContext context) {
         try {
-            return Result.ok(getLocalDate(value));
+            return Result.ok(getDate(value));
         } catch (Exception e) {
             return Result.error("Please enter valid date");
         }
     }
 
     @Override
-    public Date convertToPresentation(LocalDate value, ValueContext context) {
+    public LocalDate convertToPresentation(Date value, ValueContext context) {
         try {
-            return getDate(value);
+            return getLocalDate(value);
         } catch (Exception e) {
             String er = "Exception "+e.toString();
             log.error(er);

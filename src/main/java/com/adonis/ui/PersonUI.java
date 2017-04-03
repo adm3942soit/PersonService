@@ -35,10 +35,7 @@ public class PersonUI extends UI {
         grid.addColumn(Person::getFirstName).setCaption("First name");
         grid.addColumn(Person::getLastName).setCaption("Last name");
         grid.addColumn(Person::getEmail).setCaption("Email");
-        grid.addColumn(Person::getPicture).setCaption("Picture");
         grid.addColumn(Person::getLocalDateBirthDay).setCaption("BirthDay");
-//        grid.addColumn(Person::getLocalDateCreated).setCaption("Created");
-//        grid.addColumn(Person::getLocalDateUpdated).setCaption("Updated");
 
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         grid.addSelectionListener(e -> updateForm());
