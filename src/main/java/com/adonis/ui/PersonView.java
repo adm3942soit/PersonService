@@ -31,8 +31,12 @@ public class PersonView extends PersonDesign {
 
 		if(view){
 			picture.setVisible(false);
-		}else
-			picture.setVisible(true);
+		}else {
+			if(Strings.isNullOrEmpty(picture.getValue())) {
+				picture.setVisible(true);
+			}else
+				picture.setVisible(false);
+		}
 
 		save.addClickListener(evt -> {
 			try {
@@ -72,13 +76,13 @@ public class PersonView extends PersonDesign {
 		if(!Strings.isNullOrEmpty(selectedRow.getPicture())) {
 			pictureImage.setSource(new ExternalResource(selectedRow.getPicture()));
 			picture.setValue(selectedRow.getPicture());
+			picture.setVisible(!view);
 		}
 		else {
 			pictureImage.setSource(new ExternalResource(""));
 			picture.setValue("");
+			picture.setVisible(true);
 		}
-		picture.setVisible(!view);
-
 	}
 
 }
