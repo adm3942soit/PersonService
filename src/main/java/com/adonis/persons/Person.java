@@ -1,6 +1,7 @@
 package com.adonis.persons;
 
 
+import com.adonis.utils.DateUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
+
+import static java.lang.System.currentTimeMillis;
 
 /**
  * A domain object example. In a real application this would probably be a JPA
@@ -70,6 +73,16 @@ public class Person implements Serializable, Cloneable {
 	private Date created;
 	@Column(name = "UPDATED")
 	private Date updated;
+
+	@PrePersist
+	protected void setCreatedDate() {
+		created = new Date(currentTimeMillis());
+	}
+
+	@PreUpdate
+	protected void setUpdatedDate() {
+		updated = new Date(currentTimeMillis());
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -141,5 +154,7 @@ public class Person implements Serializable, Cloneable {
 	public LocalDate getLocalDateUpdated(){
 		return getLocalDate(getUpdated());
 	}
-
+    public String getBirthDayString(){
+		return DateUtils.convertToString(dateOfBirth);
+	}
 }

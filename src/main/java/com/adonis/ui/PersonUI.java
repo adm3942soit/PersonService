@@ -61,6 +61,7 @@ public class PersonUI extends UI {
     private void updateForm() {
         if (!grid.getSelectedItems().isEmpty()) {
             customer = (Person) grid.getSelectionModel().getFirstSelectedItem().get();
+            customer = service.findByFirstLastNameEmail(customer.getFirstName(), customer.getLastName(), customer.getEmail());
             editor.setPerson(customer);
             grid.getEditor().save();
         }

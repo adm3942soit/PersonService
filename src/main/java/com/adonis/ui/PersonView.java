@@ -1,7 +1,6 @@
 package com.adonis.ui;
 
 import com.adonis.persons.Person;
-import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.data.Binder;
 import com.vaadin.server.ExternalResource;
 
@@ -18,7 +17,9 @@ public class PersonView extends PersonDesign {
 	Binder<Person> binder = new Binder<>(Person.class);
 
 	public PersonView(PersonSaveListener saveEvt, PersonDeleteListener delEvt) {
-//		binder.forField(dateOfBirth).bind(Person::getLocalDateBirthDay, Person::setLocalDateBirthDay);
+
+		binder.forField(dateOfBirth).bind("dateOfBirth");
+
 		binder.bindInstanceFields(this );
 
 		save.addClickListener(evt -> {

@@ -21,7 +21,7 @@ public class PersonDesign extends HorizontalLayout {
     protected TextField firstName;
     protected TextField lastName;
     protected TextField email;
-//    protected DateField dateOfBirth;
+    protected DateField dateOfBirth;
     protected TextArea notes;
     protected TextField login;
     protected PasswordField password;
