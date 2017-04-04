@@ -116,34 +116,4 @@ public class Person implements Serializable {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-//	public LocalDate getLocalDate(Date date){
-//		return date == null?null:Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-//	}
-//	public Date getDate(LocalDate localDate){
-//		return localDate==null?null:Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-//	}
-//
-//	public LocalDate getLocalDateBirthDay(){
-//		return getLocalDate(getDateOfBirth());
-//	}
-//	public void setLocalDateBirthDay(LocalDate localDate){
-//		dateOfBirth = getDate(localDate);
-//	}
-//
-//	public LocalDate getLocalDateCreated(){
-//		return getLocalDate(getCreated());
-//	}
-//	public void setLocalDateCreated(LocalDate localDate){
-//		created = getDate(localDate);
-//	}
-//	public void setLocalDateUpdated(LocalDate localDate){
-//		updated = getDate(localDate);
-//	}
-//
-//	public LocalDate getLocalDateUpdated(){
-//		return getLocalDate(getUpdated());
-//	}
-//    public String getBirthDayString(){
-//		return DateUtils.convertToString(dateOfBirth);
-//	}
 }
