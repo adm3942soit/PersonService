@@ -6,6 +6,7 @@ import com.adonis.main.login.BasicAccessControl;
 import com.adonis.main.login.LoginView;
 import com.adonis.persons.service.PersonService;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Widgetset;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
@@ -24,6 +25,7 @@ import java.util.function.Consumer;
  */
 @SpringUI
 @Theme("mytheme")
+@Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 public class MainUI extends UI {
 
     @Autowired

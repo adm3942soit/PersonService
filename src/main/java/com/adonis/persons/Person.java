@@ -1,16 +1,12 @@
 package com.adonis.persons;
 
 
-import com.adonis.utils.DateUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
@@ -35,29 +31,20 @@ public class Person implements Serializable {
 
 
 	@Column(name = "FIRST_NAME", nullable = false)
-//	@NotNull(message = "First Name is required")
-//	@Size(min = 3, max = 40, message = "First Name must be longer than 3 and less than 40 characters")
 	private String firstName;
 
 	@Column(name = "LAST_NAME", nullable = false)
-//	@NotNull(message = "Last Name is required")
-//	@Size(min = 3, max = 40, message = "Last Name must be longer than 3 and less than 40 characters")
 	private String lastName;
 
 	@Column(name = "EMAIL", unique = true, nullable = false)
-//	@NotNull(message = "Email is required")
-//	@Pattern(regexp = ".+@.+\\.[a-z]+", message = "Must be valid email")
 	private String email;
 
-	//@NotNull(message = "Login is required")
 	@Column(name = "LOGIN", nullable = true, unique = true)
 	private String login;
 
-	//@NotNull(message = "Login is required")
 	@Column(name = "PASSWORD", nullable = true)
 	private String password;
 
-//	@Temporal(javax.persistence.TemporalType.DATE)
 	@Column(name = "DATE_OF_BIRTH", nullable = true)
 	private Date dateOfBirth;
 
@@ -129,34 +116,34 @@ public class Person implements Serializable {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public LocalDate getLocalDate(Date date){
-		return date == null?null:Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-	}
-	public Date getDate(LocalDate localDate){
-		return localDate==null?null:Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-	}
-
-	public LocalDate getLocalDateBirthDay(){
-		return getLocalDate(getDateOfBirth());
-	}
-	public void setLocalDateBirthDay(LocalDate localDate){
-		dateOfBirth = getDate(localDate);
-	}
-
-	public LocalDate getLocalDateCreated(){
-		return getLocalDate(getCreated());
-	}
-	public void setLocalDateCreated(LocalDate localDate){
-		created = getDate(localDate);
-	}
-	public void setLocalDateUpdated(LocalDate localDate){
-		updated = getDate(localDate);
-	}
-
-	public LocalDate getLocalDateUpdated(){
-		return getLocalDate(getUpdated());
-	}
-    public String getBirthDayString(){
-		return DateUtils.convertToString(dateOfBirth);
-	}
+//	public LocalDate getLocalDate(Date date){
+//		return date == null?null:Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+//	}
+//	public Date getDate(LocalDate localDate){
+//		return localDate==null?null:Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//	}
+//
+//	public LocalDate getLocalDateBirthDay(){
+//		return getLocalDate(getDateOfBirth());
+//	}
+//	public void setLocalDateBirthDay(LocalDate localDate){
+//		dateOfBirth = getDate(localDate);
+//	}
+//
+//	public LocalDate getLocalDateCreated(){
+//		return getLocalDate(getCreated());
+//	}
+//	public void setLocalDateCreated(LocalDate localDate){
+//		created = getDate(localDate);
+//	}
+//	public void setLocalDateUpdated(LocalDate localDate){
+//		updated = getDate(localDate);
+//	}
+//
+//	public LocalDate getLocalDateUpdated(){
+//		return getLocalDate(getUpdated());
+//	}
+//    public String getBirthDayString(){
+//		return DateUtils.convertToString(dateOfBirth);
+//	}
 }
