@@ -21,7 +21,7 @@ repositories {
 	mavenCentral()
 }
 def libs = [
-		login: fileTree(dir: 'lib/login', include: '*.jar')
+		login: fileTree(dir: 'lib', include: '*.jar')
 ]
 
 dependencies {

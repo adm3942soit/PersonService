@@ -28,7 +28,7 @@ public class MainScreen extends HorizontalLayout implements View{
 
     public MainScreen(MainUI ui) {
 
-        setStyleName("com.adonis.main-screen");
+        setStyleName("main-screen");
 
         CssLayout viewContainer = new CssLayout();
         viewContainer.addStyleName("valo-content");

@@ -1,5 +1,6 @@
 package com.adonis.main;
 
+import com.adonis.persons.Person;
 import com.adonis.persons.service.PersonService;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
@@ -13,6 +14,8 @@ import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 import lombok.NoArgsConstructor;
+import org.vaadin.crudui.crud.impl.GridBasedCrudComponent;
+import org.vaadin.crudui.layout.impl.HorizontalSplitCrudLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,14 +80,13 @@ public class Menu extends CssLayout {
             @Override
             public void menuSelected(MenuItem selectedItem) {
                 addComponent(menuPart);
-//                GridBasedCrudComponent<Person> crud = new GridBasedCrudComponent<>(Person.class);
-//                crud.setAddOperation(person ->personService.save(person));
-//                crud.setUpdateOperation(person ->personService.save(person));
-//                crud.setDeleteOperation(person ->personService.delete(person));
-//                crud.setFindAllOperation(personService::getEntries);
-//                addComponent(crud);
-//                VaadinSession.getCurrent().getSession().invalidate();
-//                Page.getCurrent().reload();
+//                getUI().getNavigator().navigateTo(PersonUI.NAME);
+                GridBasedCrudComponent<Person> crud = new GridBasedCrudComponent<>(Person.class, new HorizontalSplitCrudLayout());
+                crud.setAddOperation(person ->personService.save(person));
+                crud.setUpdateOperation(person ->personService.save(person));
+                crud.setDeleteOperation(person ->personService.delete(person));
+                crud.setFindAllOperation(()->personService.findAll());
+                addComponent(crud);
             }
         });
 

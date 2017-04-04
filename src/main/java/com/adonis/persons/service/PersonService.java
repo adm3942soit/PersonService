@@ -93,7 +93,7 @@ public class PersonService {
                     } );
     }
 
-    public void save(Person customer) {
+    public Person save(Person customer) {
         jdbcTemplate.update(
                 "UPDATE persons SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? , LOGIN=?, PASSWORD=?, DATE_OF_BIRTH=?, PICTURE=?, NOTES=? " +
                         "WHERE ID=?",
@@ -101,6 +101,7 @@ public class PersonService {
                 customer.getLogin(), customer.getPassword(), customer.getDateOfBirth(),
                 customer.getPicture(), customer.getNotes(),
                 customer.getId());
+    return findByCustomerId(customer.getId());
     }
 
     public void delete(Person customer) {

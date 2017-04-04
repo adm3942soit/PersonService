@@ -2,7 +2,6 @@ package com.adonis.main;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.Version;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.CustomLayout;
@@ -20,8 +19,7 @@ public class AboutView extends VerticalLayout implements View {
         // you can add Vaadin components in predefined slots in the custom
         // layout
         aboutContent.addComponent(
-                new Label(FontAwesome.INFO_CIRCLE.getHtml()
-                        + " This application is using Vaadin "
+                new Label(" This application is using Vaadin "
                         + Version.getFullVersion()), "info");
 
         setSizeFull();
