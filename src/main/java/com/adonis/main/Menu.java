@@ -46,14 +46,17 @@ public class Menu extends CssLayout {
         Label title = new Label("My CRUD");
         title.addStyleName(ValoTheme.LABEL_H3);
         title.setSizeUndefined();
+
         Image image = new Image(null, new ThemeResource("img/table-logo.png"));
-        image.setStyleName("logo");
+        image.setStyleName(ValoTheme.MENU_LOGO);
+
         top.addComponent(image);
         top.addComponent(title);
         menuPart.addComponent(top);
 
         // logout menu item
         MenuBar logoutMenu = new MenuBar();
+        logoutMenu.setStyleName(VALO_MENUITEMS);
         logoutMenu.addItem("Logout",  new Command() {
 
             @Override
@@ -68,6 +71,7 @@ public class Menu extends CssLayout {
 
         // dataBase menu item
         MenuBar dataMenu = new MenuBar();
+        dataMenu.setStyleName(VALO_MENUITEMS);
         dataMenu.addItem("Data",  new Command() {
 
             @Override

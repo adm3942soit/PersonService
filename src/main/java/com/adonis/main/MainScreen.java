@@ -8,6 +8,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 import lombok.NoArgsConstructor;
 
 import java.util.Spliterator;
@@ -36,6 +37,7 @@ public class MainScreen extends HorizontalLayout implements View{
         final Navigator navigator = new Navigator(ui, viewContainer);
         navigator.setErrorView(ErrorView.class);
         menu = new Menu(ui.service, navigator);
+        menu.setStyleName(ValoTheme.MENU_ROOT);
 //        menu.addView(new SampleCrudView(), SampleCrudView.VIEW_NAME,
 //                SampleCrudView.VIEW_NAME, FontAwesome.EDIT);
         menu.addView(new AboutView(), AboutView.VIEW_NAME, AboutView.VIEW_NAME, null);
