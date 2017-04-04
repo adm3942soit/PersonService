@@ -1,6 +1,6 @@
-package com.adonis.persons.service;
+package com.adonis.data.persons.service;
 
-import com.adonis.persons.Person;
+import com.adonis.data.persons.Person;
 import com.adonis.utils.DateUtils;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;

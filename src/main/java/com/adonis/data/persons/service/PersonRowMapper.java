@@ -1,6 +1,6 @@
-package com.adonis.persons.service;
+package com.adonis.data.persons.service;
 
-import com.adonis.persons.Person;
+import com.adonis.data.persons.Person;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

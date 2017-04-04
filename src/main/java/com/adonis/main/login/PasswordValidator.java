@@ -1,7 +1,7 @@
 package com.adonis.main.login;
 
-import com.adonis.persons.Person;
-import com.adonis.persons.service.PersonService;
+import com.adonis.data.persons.Person;
+import com.adonis.data.persons.service.PersonService;
 import com.vaadin.data.ValidationResult;
 import com.vaadin.data.ValueContext;
 import com.vaadin.data.validator.AbstractValidator;

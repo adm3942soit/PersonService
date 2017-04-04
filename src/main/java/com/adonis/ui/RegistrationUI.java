@@ -1,7 +1,7 @@
 package com.adonis.ui;
 
-import com.adonis.persons.Person;
-import com.adonis.persons.service.PersonService;
+import com.adonis.data.persons.Person;
+import com.adonis.data.persons.service.PersonService;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;

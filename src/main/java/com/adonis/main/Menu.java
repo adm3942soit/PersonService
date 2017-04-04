@@ -1,7 +1,7 @@
 package com.adonis.main;
 
-import com.adonis.persons.Person;
-import com.adonis.persons.service.PersonService;
+import com.adonis.data.persons.Person;
+import com.adonis.data.persons.service.PersonService;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Page;
@@ -75,12 +75,11 @@ public class Menu extends CssLayout {
         // dataBase menu item
         MenuBar dataMenu = new MenuBar();
         dataMenu.setStyleName(VALO_MENUITEMS);
-        dataMenu.addItem("Data",  new Command() {
+        dataMenu.addItem("Contacts",  new Command() {
 
             @Override
             public void menuSelected(MenuItem selectedItem) {
                 addComponent(menuPart);
-//                getUI().getNavigator().navigateTo(PersonUI.NAME);
                 GridBasedCrudComponent<Person> crud = new GridBasedCrudComponent<>(Person.class, new HorizontalSplitCrudLayout());
                 crud.setAddOperation(person ->personService.save(person));
                 crud.setUpdateOperation(person ->personService.save(person));

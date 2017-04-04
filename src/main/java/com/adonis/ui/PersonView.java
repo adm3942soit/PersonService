@@ -1,6 +1,6 @@
 package com.adonis.ui;
 
-import com.adonis.persons.Person;
+import com.adonis.data.persons.Person;
 import com.adonis.ui.converters.DateConverter;
 import com.google.common.base.Strings;
 import com.vaadin.data.Binder;

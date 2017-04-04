@@ -4,7 +4,7 @@ import com.adonis.main.MainScreen;
 import com.adonis.main.login.AccessControl;
 import com.adonis.main.login.BasicAccessControl;
 import com.adonis.main.login.LoginView;
-import com.adonis.persons.service.PersonService;
+import com.adonis.data.persons.service.PersonService;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.navigator.Navigator;

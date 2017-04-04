@@ -1,7 +1,7 @@
 package com.adonis.main.login;
 
 import com.adonis.main.MainScreen;
-import com.adonis.persons.service.PersonService;
+import com.adonis.data.persons.service.PersonService;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
