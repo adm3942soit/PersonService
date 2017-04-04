@@ -50,7 +50,7 @@ public class Person implements Serializable {
 	private String email;
 
 	//@NotNull(message = "Login is required")
-	@Column(name = "LOGIN", nullable = true)
+	@Column(name = "LOGIN", nullable = true, unique = true)
 	private String login;
 
 	//@NotNull(message = "Login is required")

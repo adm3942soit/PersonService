@@ -41,7 +41,7 @@ public class PersonView extends PersonDesign {
 		save.addClickListener(evt -> {
 			try {
 				Person person = binder.getBean();
-				if(person.getId()!=null) {
+				if(person!=null && person.getId()!=null) {
 					saveEvt.savePerson(person);
 				}else{
 					addListener.addPerson(binder.getBean());

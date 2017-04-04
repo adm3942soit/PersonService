@@ -2,35 +2,40 @@ package com.adonis.ui;
 
 import com.adonis.persons.Person;
 import com.adonis.persons.service.PersonService;
-import com.vaadin.annotations.Theme;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.UI;
+import com.google.common.collect.Lists;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.ui.*;
 import com.vaadin.ui.components.grid.EditorSaveEvent;
 import com.vaadin.ui.components.grid.EditorSaveListener;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
  * Created by oksdud on 29.03.2017.
  */
-@SpringUI
-@Theme("valo")
-public class PersonUI extends UI {
+public class PersonUI extends CustomComponent implements View {
 
-    @Autowired
-    private PersonService service;
+   // @Autowired
+    PersonService service;
 
-    private Person customer;
+    public static final String NAME = "PersonUI";
+
+    Person customer;
     com.adonis.ui.PersonView editor = new PersonView(this::savePerson, this::deletePerson, this::addPerson, true);
-    HorizontalSplitPanel splitter = new HorizontalSplitPanel();
-    private Grid<Person> grid = new Grid();
+    List customers= Lists.newArrayList();
+    Grid<Person> grid = new Grid();
+    HorizontalSplitPanel splitter = new HorizontalSplitPanel(grid, editor);
+    // The view root layout
+    HorizontalLayout viewLayout = new HorizontalLayout();
 
-    @Override
-    protected void init(VaadinRequest request) {
+
+
+//    @PostConstruct
+//    protected void init(VaadinRequest request) {
+    public PersonUI (PersonService personService){
+        this.service = personService;
+        setSizeFull();
         updateGrid();
         grid.addColumn(Person::getFirstName).setCaption("First name");
         grid.addColumn(Person::getLastName).setCaption("Last name");
@@ -46,14 +51,29 @@ public class PersonUI extends UI {
                 listPersons.forEach(person -> service.update(person));
             }
         });
+        grid.setSizeFull();
         editor.setSizeFull();
-
         splitter.setFirstComponent(grid);
         splitter.setSecondComponent(editor);
+        splitter.setSizeFull();
 
-        setContent(splitter);
+//        setContent(splitter);
 
+        viewLayout.setSizeFull();
+        viewLayout.addComponentsAndExpand(grid, editor, splitter);
+        viewLayout.setComponentAlignment(splitter, Alignment.MIDDLE_CENTER);
+//        viewLayout.addComponent(editor);
+//        viewLayout.addComponent(splitter);
+        setCompositionRoot(viewLayout);
+        selectDefault();
     }
+
+    private void selectDefault() {
+        if (!customers.isEmpty()) {
+            grid.getSelectionModel().select((Person)this.customers.get(0));
+        }
+    }
+
 
     private void updateForm() {
         if (!grid.getSelectedItems().isEmpty()) {
@@ -64,21 +84,26 @@ public class PersonUI extends UI {
         }
     }
     private void updateGrid() {
-        List customers = service.findAll();
+        customers = service.findAll();
         grid.setItems(customers);
     }
 
-    private void savePerson(Person person) {
+    public void savePerson(Person person) {
         service.update(person);
         updateGrid();
     }
 
-    private void deletePerson(Person person) {
+    public void deletePerson(Person person) {
         service.delete(person);
         updateGrid();
     }
-    private void addPerson(Person person){
+    public void addPerson(Person person){
         service.insert(person);
         updateGrid();
+    }
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent event) {
+
     }
 }
