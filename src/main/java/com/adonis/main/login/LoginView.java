@@ -23,11 +23,13 @@ public class LoginView extends VerticalLayout implements View {
 
     public LoginView(PersonService personService, LoginListener loginListener){
         this.service = personService;
+        addStyleName("login-screen");
         loginFormLayout = new HorizontalLayout();
         VerticalLayout centeringLayout = new VerticalLayout();
         centeringLayout.setStyleName("centering-layout");
 
         loginForm = new LoginForm();
+        loginForm.setStyleName(ValoTheme.FORMLAYOUT_LIGHT);
         loginForm.setSizeUndefined();
         updateCaption();
         loginForm.addLoginListener(new LoginForm.LoginListener() {

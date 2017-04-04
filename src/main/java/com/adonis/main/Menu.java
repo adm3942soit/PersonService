@@ -34,7 +34,7 @@ public class Menu extends CssLayout {
 
     public Menu(PersonService personService, Navigator navigator) {
         this.navigator = navigator;
-//        setPrimaryStyleName(ValoTheme.MENU_ROOT);
+        setPrimaryStyleName(ValoTheme.MENU_ROOT);
         menuPart = new CssLayout();
         menuPart.addStyleName(ValoTheme.MENU_PART);
 
@@ -43,7 +43,7 @@ public class Menu extends CssLayout {
 //        top.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
         top.addStyleName(ValoTheme.MENU_TITLE);
         top.setSpacing(true);
-        Label title = new Label("My CRUD");
+        Label title = new Label("My car rental manager");
         title.addStyleName(ValoTheme.LABEL_H3);
         title.setSizeUndefined();
 
@@ -110,7 +110,7 @@ public class Menu extends CssLayout {
 
         // container for the navigation buttons, which are added by addView()
         menuItemsLayout = new CssLayout();
-//        menuItemsLayout.setPrimaryStyleName(VALO_MENUITEMS);
+        menuItemsLayout.setPrimaryStyleName(VALO_MENUITEMS);
         menuPart.addComponent(menuItemsLayout);
 
         addComponent(menuPart);

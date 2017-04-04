@@ -23,7 +23,7 @@ import java.util.function.Consumer;
  * Created by oksdud on 03.04.2017.
  */
 @SpringUI
-@Theme("valo")
+@Theme("mytheme")
 public class MainUI extends UI {
 
     @Autowired
