@@ -14,6 +14,7 @@ import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 import lombok.NoArgsConstructor;
+import org.vaadin.crudui.crud.CrudOperation;
 import org.vaadin.crudui.crud.impl.GridBasedCrudComponent;
 import org.vaadin.crudui.layout.impl.HorizontalSplitCrudLayout;
 
@@ -75,17 +76,24 @@ public class Menu extends CssLayout {
         // dataBase menu item
         MenuBar dataMenu = new MenuBar();
         dataMenu.setStyleName(VALO_MENUITEMS);
-        dataMenu.addItem("Contacts",  new Command() {
+        dataMenu.addItem("Customers",  new Command() {
 
             @Override
             public void menuSelected(MenuItem selectedItem) {
                 addComponent(menuPart);
+                final VerticalLayout area = new VerticalLayout();
+                area.setSizeFull();
                 GridBasedCrudComponent<Person> crud = new GridBasedCrudComponent<>(Person.class, new HorizontalSplitCrudLayout());
                 crud.setAddOperation(person ->personService.save(person));
                 crud.setUpdateOperation(person ->personService.save(person));
                 crud.setDeleteOperation(person ->personService.delete(person));
                 crud.setFindAllOperation(()->personService.findAll());
-                addComponent(crud);
+                crud.getCrudFormFactory().setDisabledPropertyIds(CrudOperation.UPDATE, "id", "created", "updated");
+                crud.getCrudFormFactory().setDisabledPropertyIds(CrudOperation.ADD, "id", "created", "updated");
+                crud.getCrudLayout().setWidth(90F, Unit.PERCENTAGE);
+                crud.getGrid().setColumns("firstName", "lastName", "email", "login", "birthDate", "picture", "notes");
+                area.addComponent(crud);
+                addComponent(area);
             }
         });
 

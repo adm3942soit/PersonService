@@ -3,12 +3,12 @@ package com.adonis.data.persons;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
+
+import static java.lang.System.currentTimeMillis;
 
 @SuppressWarnings("serial")
 @MappedSuperclass
@@ -16,10 +16,28 @@ import java.util.Objects;
 @Setter
 public abstract class AbstractEntity implements Serializable, Cloneable {
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
 	private Long id;
 
+	@Column(name = "CREATED")
+	private Date created;
+
+	@Column(name = "UPDATED")
+	private Date updated;
+
+	@PrePersist
+	protected void setCreatedDate() {
+		created = new Date(currentTimeMillis());
+		updated = new Date(currentTimeMillis());
+	}
+
+	@PreUpdate
+	protected void setUpdatedDate() {
+		updated = new Date(currentTimeMillis());
+	}
 
 	@Override
 	public boolean equals(Object obj) {

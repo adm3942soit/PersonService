@@ -23,6 +23,7 @@ public class DateUtils {
 
         {
             add(new SimpleDateFormat("M/dd/yyyy"));
+            add(new SimpleDateFormat("dd-MMM-yy"));
             add(new SimpleDateFormat("dd.M.yyyy"));
             add(new SimpleDateFormat("M/dd/yyyy hh:mm:ss a"));
             add(new SimpleDateFormat("yyyy/MM/dd hh:mm"));

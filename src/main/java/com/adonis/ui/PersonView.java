@@ -26,7 +26,7 @@ public class PersonView extends PersonDesign {
 	public PersonView(PersonSaveListener saveEvt, PersonDeleteListener delEvt, PersonAddListener addListener, Boolean view) {
         this.view = view;
 		binder.forField(picture).bind("picture");
-		binder.forField(dayOfBirth).withConverter(new DateConverter()).bind("dateOfBirth");
+		binder.forField(dayOfBirth).withConverter(new DateConverter()).bind("birthDate");
 		binder.bindInstanceFields(this );
 
 		if(view){

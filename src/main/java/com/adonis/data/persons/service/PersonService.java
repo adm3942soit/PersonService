@@ -70,7 +70,7 @@ public class PersonService {
                     "UPDATE persons SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? , LOGIN=?, PASSWORD=?, DATE_OF_BIRTH=?, PICTURE=?, NOTES=? " +
                             "WHERE ID=?",
                     customer.getFirstName(), customer.getLastName(), customer.getEmail(),
-                    customer.getLogin(), customer.getPassword(), customer.getDateOfBirth(),
+                    customer.getLogin(), customer.getPassword(), customer.getBirthDate(),
                     customer.getPicture(), customer.getNotes(),
                     customer.getId());
     }
@@ -88,7 +88,7 @@ public class PersonService {
                             customer.getPassword(),
                             customer.getPicture(),
                             customer.getNotes(),
-                            customer.getDateOfBirth()
+                            customer.getBirthDate()
 
                     } );
     }
@@ -98,7 +98,7 @@ public class PersonService {
                 "UPDATE persons SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? , LOGIN=?, PASSWORD=?, DATE_OF_BIRTH=?, PICTURE=?, NOTES=? " +
                         "WHERE ID=?",
                 customer.getFirstName(), customer.getLastName(), customer.getEmail(),
-                customer.getLogin(), customer.getPassword(), customer.getDateOfBirth(),
+                customer.getLogin(), customer.getPassword(), customer.getBirthDate(),
                 customer.getPicture(), customer.getNotes(),
                 customer.getId());
     return findByCustomerId(customer.getId());
@@ -132,7 +132,7 @@ public class PersonService {
                 entry.setFirstName(person[1]);
                 entry.setLastName(person[2]);
                 entry.setEmail(person[3]);
-    			entry.setDateOfBirth(DateUtils.convertToDateByFormat(person[4], new SimpleDateFormat("dd-MMM-yy")));
+    			entry.setBirthDate(DateUtils.convertToDate(person[4]));
                 entry.setRemind(Math.random() > 0.5);
                 entry.setPicture(person[5]);
                 entry.setNotes(person[6]);
